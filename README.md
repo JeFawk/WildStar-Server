@@ -6,12 +6,12 @@ Info about used 3rd party libs/deps: [Dependencies](https://gitlab.com/Arctium/W
 ## Building
 
 ### Build Prerequisites
-* [.NET Core SDK 2.1.300-rc1 or later](https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.300-rc1)
+* [.NET Core SDK 3.0 alpha or later](https://github.com/dotnet/core-sdk)
 
 ### Working IDEs (optional)
-* Cross Platform: Jetbrains Rider (Build 2018.1 EAP 181.4379.538) EAP or later
-* Windows: Visual Studio version 15.7 Preview 2 or later
-* macOS: Visual Studio 2017 for Mac version 7.5 Preview 1 (7.5.0.933) or later
+* Cross Platform: Jetbrains Rider
+* Windows: Visual Studio 2017
+* macOS: Visual Studio 2017 for Mac version
 
 ### Build Instructions
 * Coming soon!
