@@ -9,22 +9,19 @@
     <ProjectReference Include="..\..\Arctium.Core\src\Arctium.Core.csproj" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /Y /S /I /D &quot;$(SolutionDir)/files/certs/.&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/certs&quot;" Condition="'$(IsWindows)' == 'true' " />
     <Exec Command="xcopy /Y /S /I /D &quot;$(SolutionDir)/files/configs/.&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/configs&quot;" Condition="'$(IsWindows)' == 'true' " />
     
-    <Exec Command="xcopy /Y /D &quot;$(SolutionDir)files\scripts\arctium-wow.bat&quot; &quot;$(SolutionDir)build\$(Configuration)\$(Platform)\arctium-wow.bat*&quot;" Condition="'$(IsWindows)' == 'true' And '$(Platform)' == 'win-x64'" />
-    <Exec Command="xcopy /Y /D &quot;$(SolutionDir)files\scripts\arctium-wow.s&quot; &quot;$(SolutionDir)build\$(Configuration)\$(Platform)\arctium-wow.sh*&quot;" Condition="'$(IsWindows)' == 'true' And ('$(Platform)' == 'linux-x64' Or '$(Platform)' == 'mac-x64')" />
+    <Exec Command="xcopy /Y /D &quot;$(SolutionDir)files\scripts\arctium-wildstar.bat&quot; &quot;$(SolutionDir)build\$(Configuration)\$(Platform)\arctium-wildstar.bat*&quot;" Condition="'$(IsWindows)' == 'true' And '$(Platform)' == 'win-x64'" />
+    <Exec Command="xcopy /Y /D &quot;$(SolutionDir)files\scripts\arctium-wildstar.sh&quot; &quot;$(SolutionDir)build\$(Configuration)\$(Platform)\arctium-wildstar.sh*&quot;" Condition="'$(IsWindows)' == 'true' And ('$(Platform)' == 'linux-x64' Or '$(Platform)' == 'mac-x64')" />
     
-    <Exec Command="mkdir -p &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/certs&quot;&#xD;&#xA;cp -aru &quot;$(SolutionDir)/files/certs/.&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/certs&quot;" Condition="'$(IsLinux)' == 'true' " />
     <Exec Command="mkdir -p &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/configs&quot;&#xD;&#xA;cp -aru &quot;$(SolutionDir)/files/configs/.&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/configs&quot;" Condition="'$(IsLinux)' == 'true' " />
     
-    <Exec Command="cp -u &quot;$(SolutionDir)/files/scripts/arctium-wow.bat&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsLinux)' == 'true' And '$(Platform)' == 'win-x64'" />
-    <Exec Command="cp -u &quot;$(SolutionDir)/files/scripts/arctium-wow.sh&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsLinux)' == 'true' And ('$(Platform)' == 'linux-x64' Or '$(Platform)' == 'mac-x64')" />
+    <Exec Command="cp -u &quot;$(SolutionDir)/files/scripts/arctium-wildstar.bat&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsLinux)' == 'true' And '$(Platform)' == 'win-x64'" />
+    <Exec Command="cp -u &quot;$(SolutionDir)/files/scripts/arctium-wildstar.sh&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsLinux)' == 'true' And ('$(Platform)' == 'linux-x64' Or '$(Platform)' == 'mac-x64')" />
     
-    <Exec Command="mkdir -p &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/certs&quot;&#xD;&#xA;rsync -r -u &quot;$(SolutionDir)/files/certs/&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/certs&quot;" Condition="'$(IsMac)' == 'true' " />
     <Exec Command="mkdir -p &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/configs&quot;&#xD;&#xA;rsync -r -u &quot;$(SolutionDir)/files/configs/&quot; &quot;$(SolutionDir)/build/$(Configuration)/$(Platform)/configs&quot;" Condition="'$(IsMac)' == 'true' " />
     
-    <Exec Command="rsync -u &quot;$(SolutionDir)files/scripts/arctium-wow.bat&quot; &quot;$(SolutionDir)build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsMac)' == 'true' And '$(Platform)' == 'win-x64'" />
-    <Exec Command="rsync -u &quot;$(SolutionDir)files/scripts/arctium-wow.sh&quot; &quot;$(SolutionDir)build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsMac)' == 'true' And ('$(Platform)' == 'linux-x64' Or '$(Platform)' == 'mac-x64')" />
+    <Exec Command="rsync -u &quot;$(SolutionDir)files/scripts/arctium-wildstar.bat&quot; &quot;$(SolutionDir)build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsMac)' == 'true' And '$(Platform)' == 'win-x64'" />
+    <Exec Command="rsync -u &quot;$(SolutionDir)files/scripts/arctium-wildstar.sh&quot; &quot;$(SolutionDir)build/$(Configuration)/$(Platform)/&quot;" Condition="'$(IsMac)' == 'true' And ('$(Platform)' == 'linux-x64' Or '$(Platform)' == 'mac-x64')" />
   </Target>
 </Project>
