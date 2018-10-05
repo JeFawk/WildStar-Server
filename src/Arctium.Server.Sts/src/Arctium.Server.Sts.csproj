@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\default.props" />
+  <PropertyGroup>
+    <AssemblyName>arctium.sts</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Arctium.Core\src\Arctium.Core.csproj" />
+  </ItemGroup>
+</Project>

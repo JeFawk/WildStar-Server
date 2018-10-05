@@ -33,7 +33,7 @@ namespace Arctium.API
                     options.Listen(IPAddress.Parse(ApiConfig.BindHost), ApiConfig.BindPort, listenOptions =>
                     {
                         // Set the HTTP protocol.
-                        // Default: Http2
+                        // Default: Http1
                         listenOptions.Protocols = ApiConfig.Protocol;
 
                         // Enable Https if enabled in config & the given certificate exists.

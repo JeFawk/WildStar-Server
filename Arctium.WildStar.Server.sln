@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{0015713A-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arctium.Core", "src\Arctium.Core\src\Arctium.Core.csproj", "{C218C3AB-BE65-43F3-BC99-1018640E545A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arctium.Server.Sts", "src\Arctium.Server.Sts\src\Arctium.Server.Sts.csproj", "{9762EC09-3C40-4AFE-89A6-3B812996C500}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\Arctium.Shared\src\Arctium.Shared.projitems*{438eacd8-80c9-4e43-ad21-88a2a0575ac9}*SharedItemsImports = 13
@@ -108,6 +110,18 @@ Global
 		{C218C3AB-BE65-43F3-BC99-1018640E545A}.Release|mac-x64.Build.0 = Release|x64
 		{C218C3AB-BE65-43F3-BC99-1018640E545A}.Release|win-x64.ActiveCfg = Release|x64
 		{C218C3AB-BE65-43F3-BC99-1018640E545A}.Release|win-x64.Build.0 = Release|x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Debug|linux-x64.ActiveCfg = Debug|linux-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Debug|linux-x64.Build.0 = Debug|linux-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Debug|mac-x64.ActiveCfg = Debug|mac-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Debug|mac-x64.Build.0 = Debug|mac-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Debug|win-x64.ActiveCfg = Debug|win-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Debug|win-x64.Build.0 = Debug|win-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Release|linux-x64.ActiveCfg = Release|linux-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Release|linux-x64.Build.0 = Release|linux-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Release|mac-x64.ActiveCfg = Release|mac-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Release|mac-x64.Build.0 = Release|mac-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Release|win-x64.ActiveCfg = Release|win-x64
+		{9762EC09-3C40-4AFE-89A6-3B812996C500}.Release|win-x64.Build.0 = Release|win-x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +132,7 @@ Global
 		{3DFE1172-8ADC-4DF8-A7F6-882D7CE0A25C} = {0015713A-F8F4-46B8-AD81-33F4588F2068}
 		{438EACD8-80C9-4E43-AD21-88A2A0575AC9} = {F3F9448B-F321-4827-A8B3-46400AEC0A1D}
 		{C218C3AB-BE65-43F3-BC99-1018640E545A} = {F3F9448B-F321-4827-A8B3-46400AEC0A1D}
+		{9762EC09-3C40-4AFE-89A6-3B812996C500} = {C34FC239-FA05-4BBE-812E-4DD37A4CF380}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E7EBB33-9161-49AB-8E97-0A020DFB8CFF}

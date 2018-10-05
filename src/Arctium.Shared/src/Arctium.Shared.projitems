@@ -9,6 +9,6 @@
     <Import_RootNamespace>Arctium.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Database\Aurora\Entities\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Database\" />
   </ItemGroup>
 </Project>
