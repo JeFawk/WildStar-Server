@@ -15,7 +15,6 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\deps\src\ExpressionSerializer\Aq.ExpressionJsonSerializer\Aq.ExpressionJsonSerializer.csproj" />
     <ProjectReference Include="..\..\..\deps\src\Lappa.ORM\deps\src\Lappa.Pluralization\src\Lappa.Pluralization.csproj" />
     <ProjectReference Include="..\..\..\deps\src\Lappa.ORM\src\Lappa.ORM\Lappa.ORM.csproj" />
   </ItemGroup>
