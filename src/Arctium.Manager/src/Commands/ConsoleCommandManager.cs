@@ -13,6 +13,7 @@ namespace Arctium.Manager.Commands
 {
     class ConsoleCommandManager
     {
+        public static string CommandPrefix = "@ServerManager:$ ";
         static readonly Dictionary<string, HandleCommand> commands = new Dictionary<string, HandleCommand>();
         delegate void HandleCommand(CommandArgs args);
 
@@ -37,7 +38,7 @@ namespace Arctium.Manager.Commands
             {
                 Thread.Sleep(1);
 
-                Console.Write("@ServerManager:$ ");
+                Console.Write(CommandPrefix);
 
                 var sLine = Console.ReadLine();
 

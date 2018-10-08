@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Arctium.Core.Logging;
 using Arctium.Core.Network.Pipes;
 using Arctium.Core.Network.Pipes.Messages;
+using Arctium.Manager.Commands;
 
 namespace Arctium.Manager.Pipes.Services.Console
 {
@@ -28,7 +30,7 @@ namespace Arctium.Manager.Pipes.Services.Console
 
             servers = new Dictionary<string, string>
             {
-                { "sts", $"{baseDir}/arctium.sts{binExtension}" },
+                { "stsserver", $"{baseDir}/arctium.sts{binExtension}" },
             };
 
             consolePipeClients = new Dictionary<string, IPCSession>();
@@ -47,7 +49,8 @@ namespace Arctium.Manager.Pipes.Services.Console
                 // Clear the console.
                 Log.Clear();
 
-                // Show current console int title.
+                ConsoleCommandManager.CommandPrefix = $"{alias}@{servers.Single(s => s.Value == child.Item1).Key}:$ ";
+
                 System.Console.Title = $"Current console: {child.Item1} ({alias})";
 
                 SelectedChild = child.Item2;
@@ -68,6 +71,8 @@ namespace Arctium.Manager.Pipes.Services.Console
 
                 SelectedChild = null;
                 Attached = false;
+
+                ConsoleCommandManager.CommandPrefix = "@ServerManager:$ ";
 
                 // Show current console int title.
                 System.Console.Title = "Current console: ServerManager";
