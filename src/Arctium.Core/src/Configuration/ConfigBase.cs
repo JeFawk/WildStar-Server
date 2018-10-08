@@ -35,7 +35,7 @@ namespace Arctium.Core.Configuration
 
                     if (value.ContainsKey(subKey))
                     {
-                        Console.WriteLine($"Replacing value for '{key}.{subKey}'.");
+                        System.Console.WriteLine($"Replacing value for '{key}.{subKey}'.");
 
                         value[subKey] = subValue;
                     }
@@ -45,7 +45,7 @@ namespace Arctium.Core.Configuration
 
                 if (configEntries.ContainsKey(key))
                 {
-                    Console.WriteLine($"Duplicate entry found for '{key}'.");
+                    System.Console.WriteLine($"Duplicate entry found for '{key}'.");
 
                     configEntries[key] = value;
                 }
@@ -80,7 +80,7 @@ namespace Arctium.Core.Configuration
 
                 if (!configEntries.TryGetValue(configEntryAttribute.Name, out var value))
                 {
-                    Console.WriteLine($"Can't find config entry '{configEntryAttribute.Name}'.");
+                    System.Console.WriteLine($"Can't find config entry '{configEntryAttribute.Name}'.");
 
                     fieldValue = configEntryAttribute.DefaultValue;
                 }

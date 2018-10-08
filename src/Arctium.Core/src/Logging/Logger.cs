@@ -35,7 +35,7 @@ namespace Arctium.Core.Logging
 
         public void Start(LogFile logFile = null)
         {
-            var logThread = new Thread(async () =>
+            var logThread = new Thread(() =>
             {
                 using (logQueue)
                 using (logFile)
@@ -45,29 +45,29 @@ namespace Arctium.Core.Logging
                     while (isLogging)
                     {
                         // Do nothing if logging is turned off (LogTypes.None) & the log queue is empty, but continue the loop.
-                        if (logTypes == LogTypes.None || !logQueue.TryTake(out Tuple<LogTypes, string, string> log))
+                        if (logTypes == LogTypes.None || !logQueue.TryTake(out var log))
                             continue;
 
                         // LogTypes.None is also used for empty/simple log lines (without timestamp, etc.).
                         if (log.Item1 != LogTypes.None)
                         {
-                            Console.ForegroundColor = ConsoleColor.White;
+                            System.Console.ForegroundColor = ConsoleColor.White;
 
-                            Console.Write($"{log.Item2} |");
+                            System.Console.Write($"{log.Item2} |");
 
-                            Console.ForegroundColor = LogTypeInfo[log.Item1].Item1;
-                            Console.Write(LogTypeInfo[log.Item1].Item2);
-                            Console.ForegroundColor = ConsoleColor.White;
+                            System.Console.ForegroundColor = LogTypeInfo[log.Item1].Item1;
+                            System.Console.Write(LogTypeInfo[log.Item1].Item2);
+                            System.Console.ForegroundColor = ConsoleColor.White;
 
-                            Console.WriteLine($"| {log.Item3}");
+                            System.Console.WriteLine($"| {log.Item3}");
 
-                            await logFile?.WriteAsync($"{log.Item2} |{LogTypeInfo[log.Item1].Item2}| {log.Item3}");
+                            logFile?.WriteAsync($"{log.Item2} |{LogTypeInfo[log.Item1].Item2}| {log.Item3}");
                         }
                         else
                         {
-                            Console.WriteLine(log.Item3);
+                            System.Console.WriteLine(log.Item3);
 
-                            await logFile?.WriteAsync(log.Item3);
+                            logFile?.WriteAsync(log.Item3);
                         }
                     }
                 }
@@ -85,9 +85,9 @@ namespace Arctium.Core.Logging
 
         public void NewLine() => SetLogger(LogTypes.None, "");
 
-        public void WaitForKey() => Console.ReadKey(true);
+        public void WaitForKey() => System.Console.ReadKey(true);
 
-        public void Clear() => Console.Clear();
+        public void Clear() => System.Console.Clear();
 
         void SetLogger(LogTypes type, string text)
         {
