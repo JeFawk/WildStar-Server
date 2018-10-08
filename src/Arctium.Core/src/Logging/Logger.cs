@@ -23,14 +23,14 @@ namespace Arctium.Core.Logging
         // No volatile support for properties, let's use a private backing field.
         public LogTypes LogTypes { get => logTypes; set => logTypes = value; }
 
-        readonly BlockingCollection<Tuple<LogTypes, string, string>> logQueue;
+        readonly BlockingCollection<Tuple<LogTypes, string, string, bool>> logQueue;
         volatile LogTypes logTypes;
 
         bool isLogging;
 
         public Logger()
         {
-            logQueue = new BlockingCollection<Tuple<LogTypes, string, string>>();
+            logQueue = new BlockingCollection<Tuple<LogTypes, string, string, bool>>();
         }
 
         public void Start(LogFile logFile = null)
@@ -44,6 +44,8 @@ namespace Arctium.Core.Logging
 
                     while (isLogging)
                     {
+                        Thread.Sleep(1);
+
                         // Do nothing if logging is turned off (LogTypes.None) & the log queue is empty, but continue the loop.
                         if (logTypes == LogTypes.None || !logQueue.TryTake(out var log))
                             continue;
@@ -59,13 +61,19 @@ namespace Arctium.Core.Logging
                             System.Console.Write(LogTypeInfo[log.Item1].Item2);
                             System.Console.ForegroundColor = ConsoleColor.White;
 
-                            System.Console.WriteLine($"| {log.Item3}");
+                            if (log.Item4)
+                                System.Console.WriteLine($"| {log.Item3}");
+                            else
+                                System.Console.Write($"| {log.Item3}");
 
                             logFile?.WriteAsync($"{log.Item2} |{LogTypeInfo[log.Item1].Item2}| {log.Item3}");
                         }
                         else
                         {
-                            System.Console.WriteLine(log.Item3);
+                            if (log.Item4)
+                                System.Console.WriteLine(log.Item3);
+                            else
+                                System.Console.Write(log.Item3);
 
                             logFile?.WriteAsync(log.Item3);
                         }
@@ -81,7 +89,7 @@ namespace Arctium.Core.Logging
 
         public void Stop() => isLogging = false;
 
-        public void Message(LogTypes logType, string text) => SetLogger(logType, text);
+        public void Message(LogTypes logType, string text, bool newLine = true) => SetLogger(logType, text, newLine);
 
         public void NewLine() => SetLogger(LogTypes.None, "");
 
@@ -89,14 +97,14 @@ namespace Arctium.Core.Logging
 
         public void Clear() => System.Console.Clear();
 
-        void SetLogger(LogTypes type, string text)
+        void SetLogger(LogTypes type, string text, bool newLine = true)
         {
             if ((logTypes & type) == type)
             {
                 if (type == LogTypes.None)
-                    logQueue.Add(Tuple.Create(type, "", text));
+                    logQueue.Add(Tuple.Create(type, "", text, newLine));
                 else
-                    logQueue.Add(Tuple.Create(type, DateTime.Now.ToString("T"), text));
+                    logQueue.Add(Tuple.Create(type, DateTime.Now.ToString("T"), text, newLine));
             }
         }
     }

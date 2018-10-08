@@ -115,7 +115,7 @@ namespace Arctium.Manager.Pipes.Services.Console
 
             process.OutputDataReceived += (sender, obj) =>
             {
-                var splitIndex = obj.Data.IndexOf("|");
+                var splitIndex = obj.Data?.IndexOf("|") ?? -1;
 
                 if (splitIndex != -1)
                 {
@@ -143,8 +143,14 @@ namespace Arctium.Manager.Pipes.Services.Console
 
             process.Exited += (s, o) =>
             {
+                // Detach before removing the child.
+                Detach(alias);
+
                 if (Childs.Remove(alias))
+                {
                     Log.Message(LogTypes.Warning, $"Server '{alias}' exited without shutdown command!!!");
+                    Log.Message(LogTypes.None, ConsoleCommandManager.CommandPrefix, false);
+                }
             };
 
             process.Start();
@@ -156,9 +162,7 @@ namespace Arctium.Manager.Pipes.Services.Console
 
         public static void Stop(string alias)
         {
-            Tuple<string, Process> process;
-
-            if (Childs.TryGetValue(alias, out process))
+            if (Childs.TryGetValue(alias, out var process))
             {
                 Log.Message(LogTypes.Info, $"Shutting down '{alias}' ({process.Item1})...");
 

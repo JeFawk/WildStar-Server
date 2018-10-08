@@ -24,7 +24,7 @@ namespace Arctium.Core.Logging
 
         public static void Pause() => logger.LogTypes = LogTypes.None;
 
-        public static void Message(LogTypes logType, string text) => logger.Message(logType, text);
+        public static void Message(LogTypes logType, string text, bool newLine = true) => logger.Message(logType, text, newLine);
 
         public static void NewLine() => logger.NewLine();
 

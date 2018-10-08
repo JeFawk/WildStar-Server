@@ -36,19 +36,18 @@ namespace Arctium.Manager.Commands
         {
             while (true)
             {
-                Thread.Sleep(1);
+                Thread.Sleep(100);
 
                 Console.Write(CommandPrefix);
 
                 var sLine = Console.ReadLine();
 
-                Log.NewLine();
-
+                // Redirect to the attached console.
                 if (ConsoleServiceManager.Attached)
                     ConsoleServiceManager.SelectedChild.StandardInput.WriteLine(sLine);
                 else
                 {
-                    var line = sLine?.Split(new[] { " " }, StringSplitOptions.None);
+                    var line = sLine?.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (line?.Length > 0)
                     {
@@ -66,6 +65,8 @@ namespace Arctium.Manager.Commands
                         }
                         else
                             Log.Message(LogTypes.Warning, $"'{cmd}' command doesn't exists.");
+
+                        Log.NewLine();
                     }
                 }
             }

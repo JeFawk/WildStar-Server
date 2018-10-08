@@ -34,11 +34,11 @@ namespace Arctium.Server.Sts.Console
         {
             while (true)
             {
-                Thread.Sleep(1);
+                Thread.Sleep(50);
 
                 System.Console.Write($"{StsServer.Alias}@StsServer:$ ");
 
-                var line = System.Console.ReadLine()?.Split(new[] { " " }, StringSplitOptions.None);
+                var line = System.Console.ReadLine()?.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (line?.Length > 0)
                 {
