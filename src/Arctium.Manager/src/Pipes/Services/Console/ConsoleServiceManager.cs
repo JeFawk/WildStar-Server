@@ -24,9 +24,11 @@ namespace Arctium.Manager.Pipes.Services.Console
             Childs = new Dictionary<string, Tuple<string, Process>>();
 
             var baseDir = Directory.GetCurrentDirectory();
+            var binExtension = (Environment.OSVersion.Platform == PlatformID.Win32NT ? ".exe" : "");
 
             servers = new Dictionary<string, string>
             {
+                { "sts", $"{baseDir}/arctium.sts{binExtension}" },
             };
 
             consolePipeClients = new Dictionary<string, IPCSession>();
@@ -86,6 +88,12 @@ namespace Arctium.Manager.Pipes.Services.Console
                 return;
             }
 
+            if (!File.Exists(servers[server]))
+            {
+                Log.Message(LogTypes.Error, $"Server file '{servers[server]}' doesn't exists.");
+                return;
+            }
+
             var process = new Process
             {
                 EnableRaisingEvents = true,
@@ -131,7 +139,7 @@ namespace Arctium.Manager.Pipes.Services.Console
             process.Exited += (s, o) =>
             {
                 if (Childs.Remove(alias))
-                    Log.Message(LogTypes.Info, $"Server '{alias}' exited without shutdown command!!!");
+                    Log.Message(LogTypes.Warning, $"Server '{alias}' exited without shutdown command!!!");
             };
 
             process.Start();

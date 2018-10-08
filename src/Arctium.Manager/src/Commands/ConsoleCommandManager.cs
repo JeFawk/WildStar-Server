@@ -37,6 +37,8 @@ namespace Arctium.Manager.Commands
             {
                 Thread.Sleep(1);
 
+                Console.Write("@ServerManager:$ ");
+
                 var sLine = Console.ReadLine();
 
                 Log.NewLine();
