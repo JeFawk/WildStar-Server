@@ -144,7 +144,8 @@ namespace Arctium.Manager.Pipes.Services.Console
             process.Exited += (s, o) =>
             {
                 // Detach before removing the child.
-                Detach(alias);
+                if (Attached)
+                    Detach(alias);
 
                 if (Childs.Remove(alias))
                 {

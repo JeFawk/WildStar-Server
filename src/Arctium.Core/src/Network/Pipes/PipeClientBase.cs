@@ -8,7 +8,7 @@ using Arctium.Core.Logging;
 
 namespace Arctium.Core.Network.Pipes
 {
-    public abstract class PipeClientBase
+    public abstract class PipeClientBase : IDisposable
     {
         readonly NamedPipeClientStream pipeClientStream;
 
