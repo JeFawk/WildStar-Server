@@ -35,6 +35,5 @@ namespace Arctium.Core.Misc
             Log.NewLine();
             Log.Message(LogTypes.Info, $"Starting WildStar {serverName}...");
         }
-
     }
 }

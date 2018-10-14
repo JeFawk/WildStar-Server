@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Arctium.
 
+using System.CommandLine;
 using Arctium.Core.Logging;
 using Arctium.Core.Misc;
 using Arctium.Manager.Commands;
@@ -14,10 +15,10 @@ namespace Arctium.Manager
 
         static void Main(string[] args)
         {
-            // Initialize the Manager server configuration file.
-            ManagerConfig.Initialize("../configs/Manager.conf");
+            ProcessCommandLine(args);
 
-            Log.Start(ManagerConfig.LogLevel, null);
+            // Start console logging.
+            Log.Start(ManagerConfig.LogLevel, new LogFile(ManagerConfig.LogDirectory, ManagerConfig.LogConsoleFile));
 
             Helper.PrintHeader(serverName);
 
@@ -36,6 +37,21 @@ namespace Arctium.Manager
                 // Listen for console commands.
                 ConsoleCommandManager.StartCommandHandler();
             }
+        }
+
+        static void ProcessCommandLine(string[] args)
+        {
+            string configFile = default;
+
+            // Parse command line args first.
+            var argSyntax = ArgumentSyntax.Parse(args, syntax =>
+            {
+                configFile = syntax.DefineOption("c|config", "../configs/Manager.conf").Value;
+            });
+
+            // Read config file..
+            ManagerConfig.Initialize(configFile);
+
         }
     }
 }

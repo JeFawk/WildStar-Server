@@ -6,6 +6,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\deps\src\System.CommandLine\System.CommandLine.csproj" />
     <ProjectReference Include="..\..\Arctium.Core\src\Arctium.Core.csproj" />
   </ItemGroup>
 </Project>

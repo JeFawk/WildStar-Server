@@ -1,4 +1,4 @@
-## Used dependencies/libraries in WoW-Core
+## Used dependencies/libraries in Arctium WildStar Server
 
-- [LappaORM](https://github.com/Arctium-Software/LappaORM)
-- [Expression serializer for JSON.NET](https://github.com/Arctium/ExpressionSerializer)
+- [LappaORM](https://gitlab.com/Arctium/Lappa/ORM) (submodule)
+- [System.CommandLine](https://github.com/dotnet/corefxlab/tree/master/archived_projects/src/System.CommandLine) (source)

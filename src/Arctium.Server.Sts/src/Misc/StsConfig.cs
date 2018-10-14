@@ -13,10 +13,10 @@ namespace Arctium.Server.Sts.Misc
         [ConfigEntry("Log.Directory", "logs/sts")]
         public static string LogDirectory { get; }
 
-        [ConfigEntry("Log.Console.File", "Console.log")]
+        [ConfigEntry("Log.Console.File", "")]
         public static string LogConsoleFile { get; }
 
-        [ConfigEntry("Service.Console.Server", "")]
+        [ConfigEntry("Service.Console.Server", ".")]
         public static string ServiceConsoleServer { get; }
 
         [ConfigEntry("Service.Console.Server.Pipe", "")]

@@ -13,7 +13,7 @@ namespace Arctium.Manager.Misc
         [ConfigEntry("Log.Directory", "logs/manager")]
         public static string LogDirectory { get; }
 
-        [ConfigEntry("Log.Console.File", "Console.log")]
+        [ConfigEntry("Log.Console.File", "")]
         public static string LogConsoleFile { get; }
 
         [ConfigEntry("Service.Console.Name", "")]

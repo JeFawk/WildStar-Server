@@ -13,7 +13,14 @@ namespace Arctium.Core.Logging
 
         public LogFile(string directory, string file)
         {
-            logStream = new FileStream($"{directory}/{DateTime.Now:yyyy-MM-dd_hh-mm-ss}_{file}", FileMode.Append, FileAccess.Write, FileShare.ReadWrite, 4096, true);
+            // File name is required.
+            if (!string.IsNullOrEmpty(file))
+            {
+                // Make sure that the specified directory exists.
+                Directory.CreateDirectory(directory);
+
+                logStream = new FileStream($"{directory}/{DateTime.Now:yyyy-MM-dd_hh-mm-ss}_{file}", FileMode.Append, FileAccess.Write, FileShare.ReadWrite, 4096, true);
+            }
         }
 
         public async Task WriteAsync(string logMessage)
