@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Arctium.
 
-using System;
 using System.IO;
 using System.Threading.Tasks;
+using Arctium.Core.Logging;
 using Arctium.Core.Network.Pipes;
 
 namespace Arctium.Manager.Pipes
@@ -16,7 +16,8 @@ namespace Arctium.Manager.Pipes
 
         public override void OnDisconnect(int sessionId)
         {
-            throw new NotImplementedException();
+            Log.NewLine();
+            Log.Message(LogTypes.Warning, "IPCSession.OnDisconnect not implemented");
         }
     }
 }

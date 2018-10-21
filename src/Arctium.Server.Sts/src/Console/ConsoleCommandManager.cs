@@ -36,7 +36,7 @@ namespace Arctium.Server.Sts.Console
             {
                 Thread.Sleep(50);
 
-                System.Console.Write($"{StsServer.Alias}@StsServer:$ ");
+                Log.Message(LogTypes.None, $"{StsServer.Alias}@StsServer:$ ", false);
 
                 var line = System.Console.ReadLine()?.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 

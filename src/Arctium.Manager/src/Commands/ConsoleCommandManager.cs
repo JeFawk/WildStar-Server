@@ -38,7 +38,7 @@ namespace Arctium.Manager.Commands
             {
                 Thread.Sleep(100);
 
-                Console.Write(CommandPrefix);
+                Log.Message(LogTypes.None, CommandPrefix, false);
 
                 var sLine = Console.ReadLine();
 

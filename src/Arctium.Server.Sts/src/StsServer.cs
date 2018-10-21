@@ -49,7 +49,7 @@ namespace Arctium.Server.Sts
             {
                 Alias = syntax.DefineOption("a|alias", "", true);
 
-                configFile = syntax.DefineOption("c|config", "../configs/StsServer.conf").Value;
+                configFile = syntax.DefineOption("c|config", "configs/StsServer.conf").Value;
             });
 
             // Command line arg checks.

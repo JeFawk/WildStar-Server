@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Arctium.Core.Logging;
 using Arctium.Core.Network.Pipes;
 using Arctium.Core.Network.Pipes.Messages;
@@ -30,7 +31,7 @@ namespace Arctium.Manager.Pipes.Services.Console
 
             servers = new Dictionary<string, string>
             {
-                { "stsserver", $"{baseDir}/arctium.sts{binExtension}" },
+                { "stsserver", $"{baseDir}/bin/arctium.sts{binExtension}" },
             };
 
             consolePipeClients = new Dictionary<string, IPCSession>();
@@ -158,14 +159,14 @@ namespace Arctium.Manager.Pipes.Services.Console
 
             Childs.Add(alias, Tuple.Create(servers[server], process));
 
-            Log.Message(LogTypes.Info, $"Started '{servers[server]}' with name '{alias}'.");
+            Log.Message(LogTypes.Info, $"Started '{process.ProcessName}' with alias '{alias}'.");
         }
 
-        public static void Stop(string alias)
+        public static async void Stop(string alias)
         {
             if (Childs.TryGetValue(alias, out var process))
             {
-                Log.Message(LogTypes.Info, $"Shutting down '{alias}' ({process.Item1})...");
+                Log.Message(LogTypes.Info, $"Shutting down '{process.Item2.ProcessName}' ({alias})...");
 
                 Childs.Remove(alias);
 
@@ -178,11 +179,15 @@ namespace Arctium.Manager.Pipes.Services.Console
                 }).GetAwaiter().GetResult();
 
                 // Wait for the server to exit.
-                process.Item2.WaitForExit();
+                var waitForExitTask = Task.Run(() => process.Item2.WaitForExit(int.MaxValue));
+                var whenAllTask = Task.WhenAll(waitForExitTask);
 
-                RemoveConsoleClient(alias);
+                if (await Task.WhenAny(whenAllTask) == whenAllTask && waitForExitTask.Result)
+                {
+                    RemoveConsoleClient(alias);
 
-                Log.Message(LogTypes.Info, "Done.");
+                    Log.Message(LogTypes.Info, $"'{process.Item2.ProcessName}' ({alias}) shutdown finished.");
+                }
             }
             else
                 Log.Message(LogTypes.Warning, $"Server with '{alias}' doesn't exists.");

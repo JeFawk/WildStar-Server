@@ -37,10 +37,9 @@ namespace Arctium.Manager.Commands
         public static void Show(CommandArgs args)
         {
             Log.Message(LogTypes.Info, $"Running servers ({ConsoleServiceManager.Childs.Count}):");
-            Log.NewLine();
 
             foreach (var child in ConsoleServiceManager.Childs)
-                Log.Message(LogTypes.Info, $"Alias: {child.Key}, Path: {child.Value.Item1}.");
+                Log.Message(LogTypes.Info, $"Alias: {child.Key}, Server: {child.Value.Item2.ProcessName}.");
         }
     }
 }
