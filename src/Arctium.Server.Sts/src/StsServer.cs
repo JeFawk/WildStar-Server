@@ -8,6 +8,9 @@ using Arctium.Core.Network.Pipes.Messages;
 using Arctium.Server.Sts.Misc;
 using Arctium.Server.Sts.Pipes;
 using Arctium.Server.Sts.Pipes.Services.Console;
+using Lappa.ORM;
+using Lappa.ORM.Constants;
+using Newtonsoft.Json;
 
 namespace Arctium.Server.Sts
 {
@@ -33,6 +36,17 @@ namespace Arctium.Server.Sts
                 ConsoleService.Send(new RegisterConsole { Alias = Alias.Value }).GetAwaiter().GetResult();
                 ConsoleService.Process();
 
+                Database.Auth.Initialize(new ConnectorSettings
+                {
+                    ApiHost = $"http://{StsConfig.ApiHost}:{StsConfig.ApiPort}/api/Auth",
+                    ConnectionMode = ConnectionMode.Api,
+                    DatabaseType = DatabaseType.MySql,
+
+                    // Assign JSON serialize/deserialize functions (Newtonsoft.Json).
+                    ApiSerializeFunction = JsonConvert.SerializeObject,
+                    ApiDeserializeFunction = JsonConvert.DeserializeObject<object[][]>
+                });
+
                 while (true)
                 {
                     Thread.Sleep(1);
@@ -49,7 +63,7 @@ namespace Arctium.Server.Sts
             {
                 Alias = syntax.DefineOption("a|alias", "", true);
 
-                configFile = syntax.DefineOption("c|config", "configs/StsServer.conf").Value;
+                configFile = syntax.DefineOption("c|config", @"configs/StsServer.conf").Value;
             });
 
             // Command line arg checks.

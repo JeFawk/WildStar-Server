@@ -25,8 +25,8 @@ namespace Arctium.Core.Network.Sockets
 
         Socket serverSocket;
 
-        IPAddress ipAddress;
-        int port;
+        readonly IPAddress ipAddress;
+        readonly int port;
 
         int activeConnections;
         bool acceptConnections;
@@ -34,7 +34,7 @@ namespace Arctium.Core.Network.Sockets
         public SocketServerBase(string address, int port, int maxSimultanAcceptConnections, int maxActiveConnections, int bufferSize)
         {
 
-            if (!IPAddress.TryParse(address, out IPAddress ipAddress))
+            if (!IPAddress.TryParse(address, out ipAddress))
             {
                 Log.Message(LogTypes.Error, $"'{address}' is not a valid IP address");
                 return;
@@ -47,8 +47,6 @@ namespace Arctium.Core.Network.Sockets
             acceptSockets = new ConcurrentStack<SocketAsyncEventArgs>();
             readWriteSockets = new ConcurrentStack<SocketAsyncEventArgs>();
 
-
-            this.ipAddress = ipAddress;
             this.port = port;
 
             Create(ipAddress, port);
@@ -118,7 +116,7 @@ namespace Arctium.Core.Network.Sockets
                     // Check for pending connections.
                     if (serverSocket.Poll(0, SelectMode.SelectRead))
                     {
-                        if (!acceptSockets.TryPop(out SocketAsyncEventArgs acceptEventArgs))
+                        if (!acceptSockets.TryPop(out var acceptEventArgs))
                         {
                             acceptEventArgs = new SocketAsyncEventArgs();
 

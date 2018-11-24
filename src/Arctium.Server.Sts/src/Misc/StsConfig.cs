@@ -16,6 +16,12 @@ namespace Arctium.Server.Sts.Misc
         [ConfigEntry("Log.Console.File", "")]
         public static string LogConsoleFile { get; }
 
+        [ConfigEntry("API.Host", "127.0.0.1")]
+        public static string ApiHost { get; }
+
+        [ConfigEntry("API.Port", 5543)]
+        public static int ApiPort { get; }
+
         [ConfigEntry("Service.Console.Server", ".")]
         public static string ServiceConsoleServer { get; }
 

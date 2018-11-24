@@ -4,6 +4,8 @@ using System;
 using System.IO;
 using System.Net;
 using Arctium.API.Misc;
+using Lappa.ORM;
+using Lappa.ORM.Constants;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -20,6 +22,17 @@ namespace Arctium.API
             // Switch to HTTP 2.
             if (ApiConfig.Protocol == HttpProtocols.Http2)
                 AppContext.SetSwitch("Switch.Microsoft.AspNetCore.Server.Kestrel.Experimental.Http2", isEnabled: true);
+
+            // Initialize database connections.
+            Database.Auth.Initialize(new ConnectorSettings
+            {
+                ConnectionMode = ConnectionMode.Database,
+                ConnectionString = Database.CreateConnectionString(ApiConfig.AuthDatabase.Host, ApiConfig.AuthDatabase.User, 
+                                                                   ApiConfig.AuthDatabase.Password, ApiConfig.AuthDatabase.Database,
+                                                                   ApiConfig.AuthDatabase.Port, ApiConfig.AuthDatabase.MinPoolSize,
+                                                                   ApiConfig.AuthDatabase.MaxPoolSize, ApiConfig.DatabaseType),
+                DatabaseType = ApiConfig.DatabaseType
+            });
 
             BuildWebHost(args).Run();
         }
