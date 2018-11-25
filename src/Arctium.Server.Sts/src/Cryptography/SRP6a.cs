@@ -91,13 +91,19 @@ namespace Arctium.Server.Sts.Cryptography
             B = GetBytes(((k * v + BigInteger.ModPow(gBN, b, BN)) % BN).ToByteArray(), 0x80);
         }
 
-        public void CalculateU(byte[] a)
+        public bool CalculateU(byte[] a)
         {
             A = a.ToBigInteger();
+
+            // Don't continue if A == 0 (mod N)
+            if (A.IsZero || (A % BN).IsZero)
+                return false;
 
             var u = ReverseUInt32(sha256.ComputeHash(a.Combine(B)));
 
             CalculateS(new BigInteger(u.Combine(new byte[1])));
+
+            return true;
         }
 
         void CalculateS(BigInteger u)
