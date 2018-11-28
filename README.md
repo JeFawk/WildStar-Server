@@ -1,7 +1,7 @@
 # Arctium WildStar Server
 
 ### Used dependencies
-Info about used 3rd party libs/deps: [Dependencies](https://gitlab.com/Arctium/WildStar/Server/blob/master/deps/README.md)
+Info about used 3rd party libs/deps: [Dependencies](https://github.com/Arctium/WildStar-Server/blob/master/deps/README.md)
 
 ## Building
 
